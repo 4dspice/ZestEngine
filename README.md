@@ -4,8 +4,8 @@ This repo includes abstractions and extra code not found in the tutorial found a
 
 ### Current stage: 
 
-![4-2a3503e9c6eb](https://user-images.githubusercontent.com/29679352/129731469-c4cfde08-67df-43f8-b00f-fdf10be6b7dd.gif)
+![zestengine](https://user-images.githubusercontent.com/117639659/224745018-48009561-e363-4b91-a6c2-fa8e25d83370.gif)
 
 ### With some extra info in the console 
 
-![potato-gfx-console](https://user-images.githubusercontent.com/29679352/126327782-40a061af-c47a-4747-93e0-2e019a91c65a.PNG)
+![zestengine_console](https://user-images.githubusercontent.com/117639659/224745103-bd340e99-b71c-4382-a73f-dee3198dc0b5.png)
