@@ -10,9 +10,9 @@ option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
 
-add_subdirectory(extern/glfw/)
-add_subdirectory(extern/glad/)
-add_subdirectory(extern/glm/)
+add_subdirectory(includes/glfw/)
+add_subdirectory(includes/glad/)
+add_subdirectory(includes/glm/)
 
 add_subdirectory(src/)
 
@@ -25,4 +25,4 @@ configure_file("shaders/vertex.glsl" "src/" COPYONLY)
 configure_file("shaders/fragment.glsl" "src/" COPYONLY)
 configure_file("textures/container.jpg" "src/" COPYONLY)
 configure_file("textures/awesomeface.png" "src/" COPYONLY)
-configure_file("textures/PixelPotato512.png" "src/" COPYONLY)
+configure_file("textures/lemon.png" "src/" COPYONLY)
