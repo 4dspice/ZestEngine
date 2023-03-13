@@ -1,5 +1,11 @@
 # Zest Engine
 
+Zest is multiplatform OpenGL graphics engine. 
+Please make sure to clone recursively to pull all the dependencies. 
+```
+git clone --recursive https://github.com/suslemon/ZestEngine.git
+```
+
 This repo includes abstractions and extra code not found in the tutorial found at https://learnopengl.com/ 
 
 ### Current stage: 
