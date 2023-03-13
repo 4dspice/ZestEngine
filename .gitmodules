@@ -1,0 +1,9 @@
+[submodule "includes/glad"]
+	path = includes/glad
+	url = https://github.com/suslemon/glad.git
+[submodule "includes/glfw"]
+	path = includes/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "includes/glm"]
+	path = includes/glm
+	url = https://github.com/g-truc/glm.git
