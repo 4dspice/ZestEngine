@@ -33,7 +33,9 @@
 
 # Directories
 out/
+build/
 
 # IDE
 /.vs
+/.vscode
 *.user
