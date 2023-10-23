@@ -11,13 +11,14 @@
 #include "stb_image.h"
 #include "camera.h"
 #include "config.h"
+#include "callbacks.h"
 
 int main()
 {
     // GLFW initialization and specifiying OpenGL window context version 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Creates the actual window, throws an error in case of failure
@@ -55,67 +56,6 @@ int main()
     //-------------------------------------------------
 
     Shader ShaderLoader("vertex.glsl", "fragment.glsl");
-
-    //-------------------------------------------------
-    // Data
-    //-------------------------------------------------
-
-    float vertices[] = {
-          -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-           0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-           0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-           0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-           0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-          -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-          -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-          -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-          -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-           0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-           0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-           0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-           0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-           0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-           0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-           0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-           0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-          -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-          -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-          -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-           0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-           0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-          -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-          -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-      };
-
-    glm::vec3 cubePositions[] = {
-        glm::vec3( 0.0f,  0.0f,  0.0f),
-        glm::vec3( 2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3( 2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3( 1.3f, -2.0f, -2.5f),
-        glm::vec3( 1.5f,  2.0f, -2.5f),
-        glm::vec3( 1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
-    };
 
     //-------------------------------------------------
     // OpenGL buffers
