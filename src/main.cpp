@@ -9,29 +9,8 @@
 
 #include "shader.h"
 #include "stb_image.h"
-
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
-
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-
-void processInput(GLFWwindow *window);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-
-
-// camera
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 5.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
-bool firstMouse = true;
-float yaw = -90.0f;
-float pitch = 0.0f;
-float lastX = float(SCR_WIDTH) / 2.0;
-float lastY = float(SCR_HEIGHT) / 2.0;
-float fov = 45.0f;
+#include "camera.h"
+#include "config.h"
 
 int main()
 {
