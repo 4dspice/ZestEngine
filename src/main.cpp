@@ -11,11 +11,11 @@
 #include "stb_image.h"
 #include "camera.h"
 #include "config.h"
-#include "callbacks.h"
+#include "window.h"
 
 int main()
 {
-    // GLFW initialization and specifiying OpenGL window context version 
+/*     // GLFW initialization and specifiying OpenGL window context version 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -41,7 +41,10 @@ int main()
         std::cerr << "Error! Could not load glad" << std::endl;
         glfwTerminate();
         return -1;
-    }
+    } */
+
+    GLFWWindow WindowInstance(800, 600, "Window");
+    WindowInstance.SetCallback();
 
     // Misc GL functions
     glViewport(0, 0, 800, 600);		// Defines the size of the OpenGL rendering viewport, this is independent of window size
@@ -169,13 +172,13 @@ int main()
     // Main render loop
     //-------------------------------------------------
 
-    while (!glfwWindowShouldClose(window))
+    while (!WindowInstance.ShouldClose())
     {
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        processInput(window);
+        //processInput(window);
 
         glClearColor(0.5f, 0.8f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -214,7 +217,7 @@ int main()
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(WindowInstance.GetWindow());
         glfwPollEvents();
     }
 
@@ -227,7 +230,7 @@ int main()
     return 0;
 }
 
-void processInput(GLFWwindow *window)
+/* void processInput(GLFWwindow *window)
 {    
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -283,3 +286,4 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
     cameraFront = glm::normalize(direction);
 }
+ */

@@ -11,6 +11,9 @@ set(SOURCE_FILES
     stb_image.h 
     stb_image.cpp 
     callbacks.h 
-    config.h)
+    config.h
+    window.h
+    window.cpp
+    )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
