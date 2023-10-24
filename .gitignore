@@ -39,3 +39,4 @@ build/
 /.vs
 /.vscode
 *.user
+*.cache
