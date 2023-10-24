@@ -1,6 +1,6 @@
 #include "window.h"
 
-GLFWWindow::GLFWWindow(int width, int height, const char* title) {
+Window::Window(int width, int height, const char* title) {
     if (!glfwInit()) {
         // Handle initialization error
     }
@@ -25,33 +25,37 @@ GLFWWindow::GLFWWindow(int width, int height, const char* title) {
     }
 }
 
-GLFWWindow::~GLFWWindow() {
+Window::~Window() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
 
-GLFWwindow* GLFWWindow::GetWindow() const {
+GLFWwindow* Window::GetWindow() const {
     return window;
 }
 
-void GLFWWindow::MakeContextCurrent() const {
+void Window::MakeContextCurrent() const {
     glfwMakeContextCurrent(window);
 }
 
-void GLFWWindow::SwapBuffers() const {
+void Window::SwapBuffers() const {
     glfwSwapBuffers(window);
 }
 
-bool GLFWWindow::ShouldClose() const {
+bool Window::ShouldClose() const {
     return glfwWindowShouldClose(window);
 }
 
-void GLFWWindow::WindowCloseCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void Window::WindowCloseCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
 }
 
-void GLFWWindow::SetCallback() {
+void Window::SetCallback() {
     glfwSetKeyCallback(window, WindowCloseCallback);
+}
+
+void Window::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
 }

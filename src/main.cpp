@@ -15,55 +15,20 @@
 
 int main()
 {
-/*     // GLFW initialization and specifiying OpenGL window context version 
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    // Creates the actual window, throws an error in case of failure
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cerr << "Error! Could not create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-
-    // GLFW specific parameters
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSetCursorPosCallback(window, mouse_callback);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))		// This function requires a valid OpenGL context 
-    {
-        std::cerr << "Error! Could not load glad" << std::endl;
-        glfwTerminate();
-        return -1;
-    } */
-
-    GLFWWindow WindowInstance(800, 600, "Window");
+    Window WindowInstance(SCR_WIDTH, SCR_HEIGHT, "Window");
     WindowInstance.SetCallback();
 
     // Misc GL functions
-    glViewport(0, 0, 800, 600);		// Defines the size of the OpenGL rendering viewport, this is independent of window size
+    //glViewport(0, 0, 800, 600);		// Defines the size of the OpenGL rendering viewport, this is independent of window size
     glEnable(GL_DEPTH_TEST);
 
     // OpenGL version info and GPU currently in use
     std::cout << glGetString(GL_RENDERER) << std::endl;
     std::cout << "OPENGL VERSION: " << glGetString(GL_VERSION) << std::endl;
 
-    //-------------------------------------------------
-    // Shader compile functions
-    //-------------------------------------------------
-
     Shader ShaderLoader("vertex.glsl", "fragment.glsl");
 
-    //-------------------------------------------------
     // OpenGL buffers
-    //-------------------------------------------------
-
     unsigned int VBO;
     unsigned int VAO;
     //unsigned int IBO;
@@ -84,10 +49,7 @@ int main()
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);	// we can unbind the VBO because it has be registered to the VAO using glVertexAttribPointer
 
-    //-------------------------------------------------
     // Texture loading
-    //-------------------------------------------------
-
     int width;
     int height;
     int nrChannels;
@@ -99,10 +61,7 @@ int main()
 
     stbi_set_flip_vertically_on_load(true);
  
-    //-------------
     // Texture 1
-    //-------------
-
     image = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
          
     // The usual glGen and glBind
@@ -124,13 +83,9 @@ int main()
     {
         std::cerr << "Texture loading failed" << std::endl;
     }
-    // Cleanup
     stbi_image_free(image);
 
-    //-------------
     // Texture 2
-    //-------------
-
     image = stbi_load("lemon.png", &width, &height, &nrChannels, 0);
 
     glGenTextures(1, &texture2);
@@ -154,10 +109,7 @@ int main()
     
     stbi_image_free(image);
 
-    //-------------------------------------------------
     // Uniforms
-    //-------------------------------------------------
-
     ShaderLoader.use();
 
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)800/(float)600, 0.1f, 100.0f);
@@ -168,10 +120,7 @@ int main()
     glUniform1i(glGetUniformLocation(ShaderLoader.ID, "texture2"), 1);
 
 
-    //-------------------------------------------------
     // Main render loop
-    //-------------------------------------------------
-
     while (!WindowInstance.ShouldClose())
     {
         float currentFrame = glfwGetTime();
