@@ -19,14 +19,14 @@ int main()
     WindowInstance.SetCallback();
 
     // Misc GL functions
-    //glViewport(0, 0, 800, 600);		// Defines the size of the OpenGL rendering viewport, this is independent of window size
+    glViewport(0, 0, 800, 600);		// Defines the size of the OpenGL rendering viewport, this is independent of window size
     glEnable(GL_DEPTH_TEST);
+
+    Shader ShaderLoader("vertex.glsl", "fragment.glsl");
 
     // OpenGL version info and GPU currently in use
     std::cout << glGetString(GL_RENDERER) << std::endl;
     std::cout << "OPENGL VERSION: " << glGetString(GL_VERSION) << std::endl;
-
-    Shader ShaderLoader("vertex.glsl", "fragment.glsl");
 
     // OpenGL buffers
     unsigned int VBO;
@@ -119,6 +119,7 @@ int main()
     glUniform1i(glGetUniformLocation(ShaderLoader.ID, "texture1"), 0);
     glUniform1i(glGetUniformLocation(ShaderLoader.ID, "texture2"), 1);
 
+    FlyingCamera Camera(WindowInstance.GetWindow(),glm::vec3(0.0f, 0.0f, 3.0f), 0.05f, 0.1f);
 
     // Main render loop
     while (!WindowInstance.ShouldClose())
@@ -143,8 +144,10 @@ int main()
         ShaderLoader.setMat4("projection", projection);
 
         // Look At matrice
-        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-        ShaderLoader.setMat4("view", view);
+/*         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+ */        
+        Camera.Update(glfwGetTime());
+        ShaderLoader.setMat4("view", Camera.GetViewMatrix());
 
         // Box rendering
         glBindVertexArray(VAO);
@@ -179,28 +182,7 @@ int main()
     return 0;
 }
 
-/* void processInput(GLFWwindow *window)
-{    
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-
-    const float cameraSpeed = 2.5f * deltaTime;
-
-    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        cameraPos += cameraSpeed * cameraFront;
-    if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cameraPos -= cameraSpeed * cameraFront;
-    if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-    if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
+/* 
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {

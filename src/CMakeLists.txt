@@ -5,12 +5,13 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
 endif()
 
 set(SOURCE_FILES 
-    main.cpp   
+    main.cpp
+    camera.h
+    camera.cpp   
     shader.h 
     shader.cpp 
     stb_image.h 
     stb_image.cpp 
-    callbacks.h 
     config.h
     window.h
     window.cpp

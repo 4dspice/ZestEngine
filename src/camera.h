@@ -1,14 +1,45 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "config.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
 
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 5.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+class FlyingCamera {
+public:
+    FlyingCamera(GLFWwindow* window, glm::vec3 initialPosition, float initialSpeed, float sensitivity);
 
-bool firstMouse = true;
-float yaw = -90.0f;
-float pitch = 0.0f;
-float lastX = float(SCR_WIDTH) / 2.0;
-float lastY = float(SCR_HEIGHT) / 2.0;
+    void Update(float deltaTime);
+    glm::mat4 GetViewMatrix() const;
+    
+    // Setters for camera parameters
+    void SetPosition(glm::vec3 position);
+    void SetSpeed(float speed);
+    void SetSensitivity(float sensitivity);
+
+    // Handle keyboard input
+    void ProcessKeyboardInput(int key, bool isPressed);
+    
+    // Handle mouse input
+    void ProcessMouseMovement(float xOffset, float yOffset);
+
+private:
+    glm::vec3 position;
+    glm::vec3 front;
+    glm::vec3 up;
+    glm::vec3 right;
+
+    GLFWwindow* window;
+
+    float yaw;
+    float pitch;
+
+    float movementSpeed;
+    float mouseSensitivity;
+    float zoom;
+
+    bool firstMouse;
+    float lastX;
+    float lastY;
+
+    void UpdateCameraVectors();
+};
